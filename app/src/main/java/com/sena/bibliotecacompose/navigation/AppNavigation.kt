@@ -14,7 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-import com.sena.bibliotecacompose.data.BookRepository
+import com.sena.bibliotecacompose.model.books
+import com.sena.bibliotecacompose.model.getBookById
 import com.sena.bibliotecacompose.model.Reservation
 import com.sena.bibliotecacompose.ui.screens.HomeScreen
 import com.sena.bibliotecacompose.ui.screens.BookListScreen
@@ -77,7 +78,7 @@ fun AppNavigation() {
             BookDetailScreen(
                 bookId = bookId,
                 onReserve = {
-                    val book = BookRepository.getBookById(bookId)
+                    val book = getBookById(bookId)
 
                     if (book != null) {
                         val dateFormat = SimpleDateFormat(

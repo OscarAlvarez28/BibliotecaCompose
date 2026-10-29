@@ -6,7 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sena.bibliotecacompose.data.BookRepository
+import com.sena.bibliotecacompose.model.books
+import com.sena.bibliotecacompose.model.getBookById
 
 @Composable
 fun ReservationSuccessScreen(
@@ -14,7 +15,7 @@ fun ReservationSuccessScreen(
     onGoToReservations: () -> Unit,
     onBackHome: () -> Unit
 ) {
-    val book = BookRepository.getBookById(bookId)
+    val book = getBookById(bookId)
 
     Scaffold { padding ->
         Column(

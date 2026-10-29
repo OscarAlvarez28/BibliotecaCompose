@@ -1,15 +1,19 @@
-
 package com.sena.bibliotecacompose.ui.screens
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sena.bibliotecacompose.model.Reservation
+import com.sena.bibliotecacompose.section.ReservationSection
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +34,6 @@ fun MyReservationsScreen(
             )
         }
     ) { padding ->
-
         if (reservations.isEmpty()) {
             Column(
                 modifier = Modifier
@@ -43,48 +46,13 @@ fun MyReservationsScreen(
                 Text("Ve al catálogo y reserva un libro.")
             }
         } else {
-            LazyColumn(
+            ReservationSection(
+                reservations = reservations,
+                onReservationClick = onReservationClick,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(padding),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                items(reservations) { reservation ->
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                onReservationClick(reservation.id)
-                            }
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Text(
-                                text = reservation.bookTitle,
-                                style = MaterialTheme.typography.titleMedium
-                            )
-
-                            Text("Autor: ${reservation.author}")
-                            Text("Código: ${reservation.reservationCode}")
-                            Text("Fecha de reserva: ${reservation.reservationDate}")
-                            Text("Fecha límite: ${reservation.dueDate}")
-
-                            Text(
-                                if (reservation.isActive) {
-                                    "Estado: Activa"
-                                } else {
-                                    "Estado: Inactiva"
-                                }
-                            )
-
-                            Text("Toca para ver los detalles →")
-                        }
-                    }
-                }
-            }
+                    .padding(padding)
+            )
         }
     }
 }

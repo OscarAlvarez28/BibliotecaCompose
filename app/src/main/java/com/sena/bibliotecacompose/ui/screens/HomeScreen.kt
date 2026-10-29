@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import com.sena.bibliotecacompose.composable.PrimaryButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,15 +41,17 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Button(onClick = onViewBooks) {
-                Text("Ver libros")
-            }
+            PrimaryButton(
+                text = "Ver libros",
+                onClick = onViewBooks
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Button(onClick = onMyReservations) {
-                Text("Mis reservas")
-            }
+            PrimaryButton(
+                text = "Mis reservas",
+                onClick = onMyReservations
+            )
         }
     }
 }

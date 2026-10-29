@@ -7,7 +7,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.sena.bibliotecacompose.data.BookRepository
+import com.sena.bibliotecacompose.model.getBookById
+import com.sena.bibliotecacompose.composable.PrimaryButton
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -16,7 +17,7 @@ fun BookDetailScreen(
     onReserve: () -> Unit,
     onBack: () -> Unit
 ) {
-    val book = BookRepository.getBookById(bookId)
+    val book = getBookById(bookId)
 
     Scaffold(
         topBar = {
@@ -46,12 +47,10 @@ fun BookDetailScreen(
                 Text("Categoría: ${book.category}")
                 Text(book.description)
 
-                Button(
-                    onClick = onReserve,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Reservar libro")
-                }
+                PrimaryButton(
+                    text = "Reservar libro",
+                    onClick = onReserve
+                )
             } else {
                 Text("No se encontró el libro.")
             }
