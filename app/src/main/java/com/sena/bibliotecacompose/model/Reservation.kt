@@ -1,3 +1,4 @@
+
 package com.sena.bibliotecacompose.model
 
 data class Reservation(
@@ -6,6 +7,7 @@ data class Reservation(
     val bookTitle: String,
     val author: String,
     val reservationDate: String,
+    val dueDate: String,
     val reservationCode: String,
     val isActive: Boolean = true
 )

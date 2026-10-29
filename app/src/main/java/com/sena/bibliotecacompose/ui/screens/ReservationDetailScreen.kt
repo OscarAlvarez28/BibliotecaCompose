@@ -1,3 +1,4 @@
+
 package com.sena.bibliotecacompose.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
@@ -23,30 +24,10 @@ import com.sena.bibliotecacompose.model.Reservation
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReservationDetailScreen(
-    reservationId: Int,
+    reservation: Reservation?,
     onRenew: () -> Unit,
     onBack: () -> Unit
 ) {
-    val reservation = when (reservationId) {
-        1 -> Reservation(
-            id = 1,
-            bookId = 1,
-            bookTitle = "Clean Code",
-            author = "Robert C. Martin",
-            reservationDate = "29/10/2026",
-            reservationCode = "RES-001"
-        )
-        2 -> Reservation(
-            id = 2,
-            bookId = 2,
-            bookTitle = "El programador pragmático",
-            author = "Andrew Hunt y David Thomas",
-            reservationDate = "30/10/2026",
-            reservationCode = "RES-002"
-        )
-        else -> null
-    }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -59,6 +40,7 @@ fun ReservationDetailScreen(
             )
         }
     ) { padding ->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -66,14 +48,19 @@ fun ReservationDetailScreen(
                 .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+
             if (reservation != null) {
+
                 Text(
                     text = reservation.bookTitle,
                     style = MaterialTheme.typography.headlineSmall
                 )
+
                 Text("Autor: ${reservation.author}")
                 Text("Código: ${reservation.reservationCode}")
                 Text("Fecha de reserva: ${reservation.reservationDate}")
+                Text("Fecha límite: ${reservation.dueDate}")
+
                 Text(
                     "Estado: ${
                         if (reservation.isActive) "Activa" else "Cancelada"
@@ -95,6 +82,7 @@ fun ReservationDetailScreen(
                 ) {
                     Text("Volver a mis reservas")
                 }
+
             } else {
                 Text("No se encontró la reserva.")
             }

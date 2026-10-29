@@ -1,3 +1,4 @@
+
 package com.sena.bibliotecacompose.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
@@ -25,10 +26,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun RenewReservationScreen(
     reservationId: Int,
-    onRenewed: () -> Unit,
+    onRenewed: (Int) -> Unit,
     onBack: () -> Unit
 ) {
-    val selectedDays = remember { mutableStateOf(7) }
+    val selectedDays = remember {
+        mutableStateOf(7)
+    }
 
     Scaffold(
         topBar = {
@@ -42,6 +45,7 @@ fun RenewReservationScreen(
             )
         }
     ) { padding ->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -49,6 +53,7 @@ fun RenewReservationScreen(
                 .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+
             Text(
                 text = "Reserva #$reservationId",
                 style = MaterialTheme.typography.titleLarge
@@ -57,8 +62,11 @@ fun RenewReservationScreen(
             Text("Selecciona el tiempo adicional:")
 
             listOf(7, 14, 21).forEach { days ->
+
                 OutlinedButton(
-                    onClick = { selectedDays.value = days },
+                    onClick = {
+                        selectedDays.value = days
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
@@ -76,7 +84,9 @@ fun RenewReservationScreen(
             Text("Tiempo seleccionado: ${selectedDays.value} días")
 
             Button(
-                onClick = onRenewed,
+                onClick = {
+                    onRenewed(selectedDays.value)
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Confirmar renovación")
